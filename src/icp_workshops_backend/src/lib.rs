@@ -5,18 +5,18 @@ fn greet(name: String) -> String {
 
 
 #[ic_cdk::query]
-fn calculate(a: i32, b: i32, operator: String)  -> i32 {
+fn calculate(a: i32, b: i32, operator: String) -> String {
     let result = match operator.as_str() {
         "+" => Some(a+b),
         "-" => Some(a-b),
         "*" => Some(a*b),
-        "/" => b !== 0 {Some(a/b)} else {None},
-        _ => None
-    }
+        "/" => if b != 0 {Some(a/b)} else {None},
+        _ => None,
+    };
 
-    match {
+    match result {
         Some(val) => format!("Result {}", val),
-        None => "Invalid operator or division by zero".to_string();
+        None => "Invalid operator or division by zero".to_string(),
     }
 
 }
